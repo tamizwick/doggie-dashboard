@@ -1,0 +1,10 @@
+.tile {
+    margin: 1em 2em;
+    border-radius: .25em;
+    box-shadow: 3px 5px 15px #30475e;
+    display: inline-block;
+}
+
+.tile h2 {
+    margin: .5em;
+}
