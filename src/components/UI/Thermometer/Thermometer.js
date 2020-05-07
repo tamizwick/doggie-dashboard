@@ -1,18 +1,26 @@
 import React from 'react';
 import classes from './Thermometer.module.css';
 
-import useFillThermometer from '../../../hooks/filler-hook';
+import useFiller from '../../../hooks/filler-hook';
 
 const Thermometer = (props) => {
-    const { fillAmount, increaseFillAmount } = useFillThermometer();
+    const { fillAmount, increaseFillAmount } = useFiller();
+
+    const externalAmount = props.externalAmount;
+    let amount;
+    if (externalAmount) {
+        amount = externalAmount;
+    } else {
+        amount = fillAmount;
+    }
 
     return (
         <div className={classes.thermometer}>
             <div className={classes.tube}>
-                <div className={classes.mercury} style={{ height: fillAmount + '%' }}></div>
+                <div className={classes.mercury} style={{ height: amount + '%' }}></div>
             </div>
             <div className={classes.bulb}></div>
-            <button onClick={() => increaseFillAmount(15)}>CLick</button>
+            {!externalAmount && <button onClick={() => increaseFillAmount(15)}>Add</button>}
         </div>
     );
 }

@@ -1,0 +1,18 @@
+.foodContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    flex-direction: row-reverse;
+    margin: .5em;
+    font-size: 2em;
+    max-width: 200px;
+}
+
+.foodContainer i {
+    margin: .25em;
+    color: #ececec;
+}
+
+.foodContainer i.fullBone {
+    color: #c1a57b;
+}

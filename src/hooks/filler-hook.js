@@ -1,17 +1,18 @@
 import { useState } from 'react';
 
-const useFillThermometer = () => {
-    const [fillAmount, setFillAmount] = useState(0);
+const useFiller = (initialAmount, maxAmount) => {
+    const [fillAmount, setFillAmount] = useState(initialAmount);
 
     const increaseFillAmount = (increaseBy) => {
-        if (fillAmount <= 100 - increaseBy) {
+        if (fillAmount <= maxAmount - increaseBy) {
             setFillAmount(fillAmount + increaseBy);
         } else {
-            setFillAmount(100);
+            setFillAmount(maxAmount);
         }
     };
 
     const decreaseFillAmount = (decreaseBy) => {
+        console.log('decreased')
         if (fillAmount >= decreaseBy) {
             setFillAmount(fillAmount - decreaseBy);
         } else {
@@ -26,4 +27,4 @@ const useFillThermometer = () => {
     }
 };
 
-export default useFillThermometer;
+export default useFiller;
