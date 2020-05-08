@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import classes from './Food.module.css';
@@ -7,6 +7,21 @@ import Button from '../UI/Button/Button';
 
 const Food = (props) => {
     const { fillAmount, increaseFillAmount, decreaseFillAmount } = useFiller(1, 9);
+    const { decreaseHappiness, increaseHappiness } = props;
+
+    useEffect(() => {
+        const interval = setInterval(() => fillAmount > 0 && decreaseFillAmount(1), 5000);
+        return () => clearInterval(interval);
+    }, [decreaseFillAmount, fillAmount]);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            if (fillAmount < 3) {
+                decreaseHappiness();
+            }
+        }, 5000);
+        return () => clearInterval(interval);
+    }, [fillAmount, decreaseHappiness]);
 
     const emptyBones = [...Array(9 - fillAmount)].map((bone, index) => <i key={'empty' + index} className=' fas fa-bone'></i>);
     const fullBones = [...Array(fillAmount)].map((bone, index) => <i key={'full' + index} className={classes.fullBone + ' fas fa-bone'}></i>);
@@ -18,9 +33,9 @@ const Food = (props) => {
     const feedDog = () => {
         increaseFillAmount(1);
         if (fillAmount < 9) {
-            props.increaseHappiness();
+            increaseHappiness();
         }
-    }
+    };
 
     return (
         <div className={classes.food}>
@@ -34,7 +49,8 @@ const Food = (props) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        increaseHappiness: () => dispatch({ type: 'FEED' })
+        increaseHappiness: () => dispatch({ type: 'FEED' }),
+        decreaseHappiness: () => dispatch({ type: 'HUNGER' })
     };
 };
 

@@ -12,7 +12,6 @@ const useFiller = (initialAmount, maxAmount) => {
     };
 
     const decreaseFillAmount = (decreaseBy) => {
-        console.log('decreased')
         if (fillAmount >= decreaseBy) {
             setFillAmount(fillAmount - decreaseBy);
         } else {

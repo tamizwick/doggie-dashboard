@@ -4,6 +4,7 @@ import classes from './Tiles.module.css';
 import Tile from '../Tile/Tile';
 import Happiness from '../../../containers/Happiness/Happiness';
 import Food from '../../Food/Food';
+import Water from '../../Water/Water';
 
 const Tiles = (props) => {
     return (
@@ -14,12 +15,11 @@ const Tiles = (props) => {
             <Tile title='Food'>
                 <Food />
             </Tile>
-            {/* Food */}
-            {/* Water */}
+            <Tile title='Water'>
+                <Water />
+            </Tile>
             {/* Ear Scratches */}
             {/* Distance Walked */}
-            {/* Tired-o-meter */}
-            {/* Nearby Cats */}
         </div>
     );
 }

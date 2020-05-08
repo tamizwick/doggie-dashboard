@@ -8,7 +8,7 @@ const Thermometer = (props) => {
 
     const externalAmount = props.externalAmount;
     let amount;
-    if (externalAmount) {
+    if (externalAmount || externalAmount === 0) {
         amount = externalAmount;
     } else {
         amount = fillAmount;
@@ -20,7 +20,7 @@ const Thermometer = (props) => {
                 <div className={classes.mercury} style={{ height: amount + '%' }}></div>
             </div>
             <div className={classes.bulb}></div>
-            {!externalAmount && <button onClick={() => increaseFillAmount(15)}>Add</button>}
+            {!externalAmount && externalAmount !== 0 ? <button onClick={() => increaseFillAmount(15)}>Add</button> : null}
         </div>
     );
 }
