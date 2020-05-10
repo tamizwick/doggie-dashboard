@@ -5,6 +5,7 @@ import Tile from '../Tile/Tile';
 import Happiness from '../../../containers/Happiness/Happiness';
 import Food from '../../Food/Food';
 import Water from '../../Water/Water';
+import EarScratches from '../../../containers/EarScratches/EarScratches';
 
 const Tiles = (props) => {
     return (
@@ -17,6 +18,9 @@ const Tiles = (props) => {
             </Tile>
             <Tile title='Water'>
                 <Water />
+            </Tile>
+            <Tile title='Ear Scratches'>
+                <EarScratches />
             </Tile>
             {/* Ear Scratches */}
             {/* Distance Walked */}
