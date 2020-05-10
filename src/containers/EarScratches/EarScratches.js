@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import classes from './EarScratches.module.css';
 
+import EarScratchMeter from '../../components/EarScratchMeter/EarScratchMeter';
+
 const EarScratches = (props) => {
     const [isScratching, setIsScratching] = useState(false);
 
@@ -31,6 +33,7 @@ const EarScratches = (props) => {
 
     return (
         <div className={classes.earContainer}>
+            <EarScratchMeter isScratching={isScratching} />
             <div
                 className={classes.ear}
                 onMouseDown={scratchEar}

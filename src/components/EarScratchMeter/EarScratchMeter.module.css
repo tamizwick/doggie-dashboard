@@ -1,0 +1,16 @@
+.meter {
+    margin: 0 .5em .5em 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.pellet {
+    height: 8px;
+    width: 15px;
+    border: 2px solid maroon;
+    border-radius: 30%;
+}
+
+.fullPellet {
+    background: maroon;
+}
