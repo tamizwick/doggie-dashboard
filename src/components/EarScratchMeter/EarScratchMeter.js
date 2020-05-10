@@ -1,13 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 import classes from './EarScratchMeter.module.css';
 import useFiller from '../../hooks/filler-hook';
 
 const EarScratchMeter = (props) => {
-    const [timer, setTimer] = useState(null);
     const { fillAmount, increaseFillAmount, decreaseFillAmount } = useFiller(4, 10);
-    const { isScratching } = props;
+    const { isScratching, increaseHappiness, decreaseHappiness } = props;
 
-    //@TODO: increaseFillAmount while isScratching is true. Why isn't useEffect working the way I want it to?
+    useEffect(() => {
+        const interval = setInterval(() => {
+            if (isScratching) {
+                increaseFillAmount(1);
+                increaseHappiness();
+            }
+        }, 500);
+        return () => clearInterval(interval);
+    }, [increaseFillAmount, increaseHappiness, isScratching]);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            if (fillAmount > 0 && !isScratching) {
+                decreaseFillAmount(1);
+            }
+            if (fillAmount < 3 && !isScratching) {
+                decreaseHappiness();
+            }
+        }, 1000);
+        return () => clearInterval(interval);
+    }, [isScratching, decreaseFillAmount, fillAmount, decreaseHappiness]);
 
     const fullPellets = [...Array(fillAmount)].map((pellet, index) => {
         return <div className={`${classes.pellet} ${classes.fullPellet}`} key={'full' + index}></div>;
@@ -27,4 +47,11 @@ const EarScratchMeter = (props) => {
     );
 }
 
-export default EarScratchMeter;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        increaseHappiness: () => dispatch({ type: 'SCRATCH' }),
+        decreaseHappiness: () => dispatch({ type: 'ITCH' })
+    };
+};
+
+export default connect(null, mapDispatchToProps)(EarScratchMeter);

@@ -52,6 +52,30 @@ const reducer = (state = initialState, action) => {
                     happinessAmount: 0
                 }
             }
+        case 'SCRATCH':
+            if (state.happinessAmount + 3 <= 100) {
+                return {
+                    ...state,
+                    happinessAmount: state.happinessAmount + 3
+                };
+            } else {
+                return {
+                    ...state,
+                    happinessAmount: 100
+                }
+            }
+        case 'ITCH':
+            if (state.happinessAmount - 8 >= 0) {
+                return {
+                    ...state,
+                    happinessAmount: state.happinessAmount - 8
+                };
+            } else {
+                return {
+                    ...state,
+                    happinessAmount: 0
+                }
+            }
         default:
             return state;
     }
