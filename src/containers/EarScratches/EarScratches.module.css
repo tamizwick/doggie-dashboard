@@ -8,6 +8,11 @@
     background: brown;
 }
 
+.earImg {
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+}
+
 .scratchIndicator {
     min-height: 1.5em;
 }

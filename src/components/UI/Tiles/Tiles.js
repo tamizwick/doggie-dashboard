@@ -22,7 +22,6 @@ const Tiles = (props) => {
             <Tile title='Ear Scratches'>
                 <EarScratches />
             </Tile>
-            {/* Ear Scratches */}
             {/* Distance Walked */}
         </div>
     );

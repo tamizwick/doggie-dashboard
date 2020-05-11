@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import classes from './EarScratches.module.css';
 
 import EarScratchMeter from '../../components/EarScratchMeter/EarScratchMeter';
+import ear from '../../assets/ear.jpg';
 
 const EarScratches = (props) => {
     const [isScratching, setIsScratching] = useState(false);
@@ -38,7 +39,9 @@ const EarScratches = (props) => {
                 className={classes.ear}
                 onMouseDown={scratchEar}
                 onMouseUp={endScratching}
-            ></div>
+            >
+                <img src={ear} className={classes.earImg} />
+            </div>
             <p className={classes.scratchIndicator}>{isScratching ? 'Scratching...' : ''}</p>
         </div>
     );
