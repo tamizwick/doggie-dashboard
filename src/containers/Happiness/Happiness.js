@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import Thermometer from '../../components/UI/Thermometer/Thermometer';
 import happyImg from '../../assets/happy.jpg';
@@ -8,25 +8,21 @@ import sadImg from '../../assets/sad.jpg';
 import classes from './Happiness.module.css';
 
 const Happiness = (props) => {
+    const amount = useSelector(state => state.happinessAmount);
+
     let dogSrc = neutralImg;
-    if (props.amount > 60) {
+    if (amount > 60) {
         dogSrc = happyImg;
-    } else if (props.amount < 20) {
+    } else if (amount < 20) {
         dogSrc = sadImg;
     }
 
     return (
         <div className={classes.happiness}>
-            <Thermometer externalAmount={props.amount} />
+            <Thermometer externalAmount={amount} />
             <img src={dogSrc} />
         </div>
     );
 }
 
-const mapStateToProps = (state) => {
-    return {
-        amount: state.happinessAmount
-    };
-};
-
-export default connect(mapStateToProps)(Happiness);
+export default (Happiness);
