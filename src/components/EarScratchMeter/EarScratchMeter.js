@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import classes from './EarScratchMeter.module.css';
 import useFiller from '../../hooks/filler-hook';
 
 const EarScratchMeter = (props) => {
     const { fillAmount, increaseFillAmount, decreaseFillAmount } = useFiller(4, 10);
     const { isScratching } = props;
+    const isPaused = useSelector(state => state.isPaused);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -20,15 +21,15 @@ const EarScratchMeter = (props) => {
 
     useEffect(() => {
         const interval = setInterval(() => {
-            if (fillAmount > 0 && !isScratching) {
+            if (fillAmount > 0 && !isScratching && !isPaused) {
                 decreaseFillAmount(1);
             }
-            if (fillAmount < 3 && !isScratching) {
+            if (fillAmount < 3 && !isScratching && !isPaused) {
                 dispatch({ type: 'ITCH' });
             }
         }, 1000);
         return () => clearInterval(interval);
-    }, [isScratching, decreaseFillAmount, fillAmount, dispatch]);
+    }, [isScratching, decreaseFillAmount, fillAmount, dispatch, isPaused]);
 
     const fullPellets = [...Array(fillAmount)].map((pellet, index) => {
         return <div className={`${classes.pellet} ${classes.fullPellet}`} key={'full' + index}></div>;

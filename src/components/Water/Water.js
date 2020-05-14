@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import classes from './Water.module.css';
 
 import useFiller from '../../hooks/filler-hook';
@@ -7,21 +7,26 @@ import Button from '../UI/Button/Button';
 
 const Water = (props) => {
     const { fillAmount, increaseFillAmount, decreaseFillAmount } = useFiller(20, 100);
+    const isPaused = useSelector(state => state.isPaused);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        const interval = setInterval(() => fillAmount > 0 && decreaseFillAmount(7), 3000);
+        const interval = setInterval(() => {
+            if (fillAmount > 0 && !isPaused) {
+                decreaseFillAmount(7);
+            }
+        }, 3000);
         return () => clearInterval(interval);
-    }, [decreaseFillAmount, fillAmount])
+    }, [decreaseFillAmount, fillAmount, isPaused])
 
     useEffect(() => {
         const interval = setInterval(() => {
-            if (fillAmount < 20) {
+            if (fillAmount < 20 && !isPaused) {
                 dispatch({ type: 'THIRST' });
             }
         }, 3000);
         return () => clearInterval(interval);
-    }, [fillAmount, dispatch]);
+    }, [fillAmount, dispatch, isPaused]);
 
     const fillWater = () => {
         increaseFillAmount(7);

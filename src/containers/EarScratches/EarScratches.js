@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import classes from './EarScratches.module.css';
 
 import EarScratchMeter from '../../components/EarScratchMeter/EarScratchMeter';
@@ -6,20 +7,23 @@ import ear from '../../assets/ear.jpg';
 
 const EarScratches = (props) => {
     const [isScratching, setIsScratching] = useState(false);
+    const isPaused = useSelector(state => state.isPaused);
 
     const scratchEar = (event) => {
-        const target = event.target;
-        setIsScratching(true);
-        let t;
-        let checkForMovement = setTimeout(() => {
-            endScratching(target);
-        }, 500);
-        target.onmousemove = () => {
-            clearTimeout(checkForMovement);
-            clearTimeout(t);
-            t = setTimeout(() => endScratching(target), 500);
-        };
-        target.onmouseleave = () => endScratching(target);
+        if (!isPaused) {
+            const target = event.target;
+            setIsScratching(true);
+            let t;
+            let checkForMovement = setTimeout(() => {
+                endScratching(target);
+            }, 500);
+            target.onmousemove = () => {
+                clearTimeout(checkForMovement);
+                clearTimeout(t);
+                t = setTimeout(() => endScratching(target), 500);
+            };
+            target.onmouseleave = () => endScratching(target);
+        }
     };
 
     const endScratching = (target) => {
@@ -40,7 +44,7 @@ const EarScratches = (props) => {
                 onMouseDown={scratchEar}
                 onMouseUp={endScratching}
             >
-                <img src={ear} className={classes.earImg} />
+                <img src={ear} className={classes.earImg} alt='dog ear' />
             </div>
             <p className={classes.scratchIndicator}>{isScratching ? 'Scratching...' : ''}</p>
         </div>

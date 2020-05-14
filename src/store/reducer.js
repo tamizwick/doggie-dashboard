@@ -1,5 +1,6 @@
 const initialState = {
-    happinessAmount: 25
+    happinessAmount: 25,
+    isPaused: true
 }
 
 const reducer = (state = initialState, action) => {

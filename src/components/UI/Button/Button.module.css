@@ -16,3 +16,12 @@
     background: #30475e;
     color: #fff;
 }
+
+.btn:disabled {
+    opacity: .2;
+    cursor: not-allowed;
+}
+
+.primaryBtn:disabled {
+    background: #035aa6;
+}
