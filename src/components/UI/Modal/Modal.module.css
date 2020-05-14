@@ -1,0 +1,72 @@
+.backdrop {
+    background: #e7e5e5;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    opacity: .7;
+    z-index: 100;
+}
+
+.modal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    margin-left: -200px;
+    width: 400px;
+    z-index: 150;
+    color: #fff;
+    border-radius: .1em;
+}
+
+.modalBox {
+    background: #222831;
+    box-shadow: 3px 5px 15px #30475e;
+    width: 300px;
+    /* min-height: 400px; */
+}
+
+.modal h3, .modal p, .els {
+    margin: 24px;
+}
+
+.modal h3 {
+    font-size: 150%;
+}
+
+.arrow {
+    background: #222831;
+    color: #fff;
+    font-size: 300%;
+    font-weight: bold;
+    line-height: 300%;
+    border-radius: 2px;
+    cursor: pointer;
+    padding-bottom: 3%;
+}
+
+.leftArrow {
+    left: 30%;
+}
+
+.rightArrow {
+    right: 30%;
+}
+
+.els {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.els button {
+    align-self: flex-end;
+}
+
+.els img {
+    margin: 0 1em 1em;
+}
