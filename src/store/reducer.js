@@ -1,7 +1,8 @@
 const initialState = {
     happinessAmount: 25,
-    isPaused: true
-}
+    isPaused: true,
+    showTutorial: true
+};
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -77,6 +78,16 @@ const reducer = (state = initialState, action) => {
                     happinessAmount: 0
                 }
             }
+        case 'HIDE_TUTORIAL':
+            return {
+                ...state,
+                showTutorial: false
+            };
+        case 'UNPAUSE':
+            return {
+                ...state,
+                isPaused: false
+            };
         default:
             return state;
     }

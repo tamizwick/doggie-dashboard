@@ -16,8 +16,8 @@
     position: absolute;
     top: 15%;
     left: 50%;
-    margin-left: -200px;
-    width: 400px;
+    margin-left: -250px;
+    width: 500px;
     z-index: 150;
     color: #fff;
     border-radius: .1em;
@@ -26,8 +26,20 @@
 .modalBox {
     background: #222831;
     box-shadow: 3px 5px 15px #30475e;
-    width: 300px;
+    width: 400px;
     /* min-height: 400px; */
+}
+
+.modalBox .close {
+    background: inherit;
+    box-shadow: none;
+    border: 0;
+    color: inherit;
+    font-size: 200%;
+    cursor: pointer;
+    padding: 0 .25em;
+    position: relative;
+    left: 360px;
 }
 
 .modal h3, .modal p, .els {
@@ -36,6 +48,7 @@
 
 .modal h3 {
     font-size: 150%;
+    margin-top: .25em;
 }
 
 .arrow {
@@ -69,4 +82,5 @@
 
 .els img {
     margin: 0 1em 1em;
+    max-width: 200px;
 }
