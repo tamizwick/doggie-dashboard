@@ -3,6 +3,7 @@ import classes from './Tiles.module.css';
 
 import Tile from '../Tile/Tile';
 import Happiness from '../../../containers/Happiness/Happiness';
+import Timer from '../../../containers/Timer/Timer';
 import Food from '../../Food/Food';
 import Water from '../../Water/Water';
 import EarScratches from '../../../containers/EarScratches/EarScratches';
@@ -12,6 +13,9 @@ const Tiles = (props) => {
         <div className={classes.Tiles}>
             <Tile title='Happy Doggie'>
                 <Happiness />
+            </Tile>
+            <Tile title='Timer'>
+                <Timer />
             </Tile>
             <Tile title='Food'>
                 <Food />
