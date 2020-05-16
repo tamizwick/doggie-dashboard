@@ -1,28 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import classes from './Timer.module.css';
 
 const Timer = (props) => {
-    const [time, setTime] = useState({
-        minutes: 0,
-        seconds: 0
-    });
+    const isPaused = useSelector(state => state.isPaused);
+    const time = useSelector(state => state.time);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setTime((prevState) => {
-                let newTime = {};
-                if (prevState.seconds < 59) {
-                    newTime.seconds = prevState.seconds + 1;
-                    newTime.minutes = prevState.minutes;
-                } else if (prevState.seconds === 59) {
-                    newTime.seconds = 0;
-                    newTime.minutes = prevState.minutes + 1;
-                }
-                return newTime;
-            });
+            if (!isPaused) {
+                dispatch({ type: 'INCREMENT_TIME' });
+            }
         }, 1000);
         return () => clearInterval(interval);
-    }, []);
+    }, [isPaused, dispatch]);
 
     return (
         <p className={classes.timer}>{String(time.minutes).padStart(2, '0')}:{String(time.seconds).padStart(2, '0')}</p>

@@ -1,7 +1,11 @@
 const initialState = {
     happinessAmount: 25,
     isPaused: true,
-    showTutorial: false
+    time: {
+        minutes: 0,
+        seconds: 0
+    },
+    showTutorial: true
 };
 
 const reducer = (state = initialState, action) => {
@@ -87,6 +91,19 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 isPaused: false
+            };
+        case 'INCREMENT_TIME':
+            let newTime = {};
+            if (state.time.seconds < 59) {
+                newTime.seconds = state.time.seconds + 1;
+                newTime.minutes = state.time.minutes;
+            } else if (state.time.seconds === 59) {
+                newTime.seconds = 0;
+                newTime.minutes = state.time.minutes + 1;
+            }
+            return {
+                ...state,
+                time: newTime
             };
         default:
             return state;
