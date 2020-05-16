@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 
 const useFiller = (initialAmount, maxAmount) => {
     const [fillAmount, setFillAmount] = useState(initialAmount);
@@ -19,10 +19,15 @@ const useFiller = (initialAmount, maxAmount) => {
         }
     };
 
+    const resetFillAmount = useCallback(() => {
+        setFillAmount(initialAmount);
+    }, [initialAmount]);
+
     return {
         fillAmount: fillAmount,
         increaseFillAmount: increaseFillAmount,
-        decreaseFillAmount: decreaseFillAmount
+        decreaseFillAmount: decreaseFillAmount,
+        resetFillAmount: resetFillAmount
     }
 };
 

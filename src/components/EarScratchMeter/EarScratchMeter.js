@@ -4,9 +4,10 @@ import classes from './EarScratchMeter.module.css';
 import useFiller from '../../hooks/filler-hook';
 
 const EarScratchMeter = (props) => {
-    const { fillAmount, increaseFillAmount, decreaseFillAmount } = useFiller(4, 10);
+    const { fillAmount, increaseFillAmount, decreaseFillAmount, resetFillAmount } = useFiller(4, 10);
     const { isScratching } = props;
     const isPaused = useSelector(state => state.isPaused);
+    const gameCount = useSelector(state => state.gameCount);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -30,6 +31,10 @@ const EarScratchMeter = (props) => {
         }, 1000);
         return () => clearInterval(interval);
     }, [isScratching, decreaseFillAmount, fillAmount, dispatch, isPaused]);
+
+    useEffect(() => {
+        resetFillAmount();
+    }, [gameCount, resetFillAmount]);
 
     const fullPellets = [...Array(fillAmount)].map((pellet, index) => {
         return <div className={`${classes.pellet} ${classes.fullPellet}`} key={'full' + index}></div>;

@@ -5,7 +5,8 @@ const initialState = {
         minutes: 0,
         seconds: 0
     },
-    showTutorial: true
+    showTutorial: true,
+    gameCount: 0
 };
 
 const reducer = (state = initialState, action) => {
@@ -87,6 +88,11 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 showTutorial: false
             };
+        case 'PAUSE':
+            return {
+                ...state,
+                isPaused: true
+            };
         case 'UNPAUSE':
             return {
                 ...state,
@@ -104,6 +110,13 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 time: newTime
+            };
+        case 'RESTART':
+            return {
+                ...initialState,
+                isPaused: false,
+                showTutorial: false,
+                gameCount: state.gameCount + 1
             };
         default:
             return state;

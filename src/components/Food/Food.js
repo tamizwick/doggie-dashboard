@@ -6,8 +6,9 @@ import useFiller from '../../hooks/filler-hook';
 import Button from '../UI/Button/Button';
 
 const Food = (props) => {
-    const { fillAmount, increaseFillAmount, decreaseFillAmount } = useFiller(1, 9);
+    const { fillAmount, increaseFillAmount, decreaseFillAmount, resetFillAmount } = useFiller(1, 9);
     const isPaused = useSelector(state => state.isPaused);
+    const gameCount = useSelector(state => state.gameCount);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -27,6 +28,10 @@ const Food = (props) => {
         }, 5000);
         return () => clearInterval(interval);
     }, [fillAmount, dispatch, isPaused]);
+
+    useEffect(() => {
+        resetFillAmount();
+    }, [gameCount, resetFillAmount]);
 
     const emptyBones = [...Array(9 - fillAmount)].map((bone, index) => <i key={'empty' + index} className=' fas fa-bone'></i>);
     const fullBones = [...Array(fillAmount)].map((bone, index) => <i key={'full' + index} className={classes.fullBone + ' fas fa-bone'}></i>);

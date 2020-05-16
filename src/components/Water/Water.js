@@ -6,8 +6,9 @@ import useFiller from '../../hooks/filler-hook';
 import Button from '../UI/Button/Button';
 
 const Water = (props) => {
-    const { fillAmount, increaseFillAmount, decreaseFillAmount } = useFiller(20, 100);
+    const { fillAmount, increaseFillAmount, decreaseFillAmount, resetFillAmount } = useFiller(20, 100);
     const isPaused = useSelector(state => state.isPaused);
+    const gameCount = useSelector(state => state.gameCount);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -27,6 +28,10 @@ const Water = (props) => {
         }, 3000);
         return () => clearInterval(interval);
     }, [fillAmount, dispatch, isPaused]);
+
+    useEffect(() => {
+        resetFillAmount();
+    }, [gameCount, resetFillAmount]);
 
     const fillWater = () => {
         increaseFillAmount(7);

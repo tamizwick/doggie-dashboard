@@ -1,10 +1,7 @@
 import React, { Fragment } from 'react';
-import { useDispatch } from 'react-redux';
 import classes from './Modal.module.css';
-
+//@TODO: React Transitions
 const Modal = (props) => {
-    const dispatch = useDispatch();
-
     const shouldArrowsDisplay = {
         left: false,
         right: false
@@ -17,11 +14,6 @@ const Modal = (props) => {
         shouldArrowsDisplay.right = true;
     }
 
-    const closeModal = () => {
-        dispatch({ type: 'HIDE_TUTORIAL' });
-        dispatch({ type: 'UNPAUSE' });
-    };
-
     return (
         <Fragment>
             {props.backdrop && <div className={classes.backdrop}></div>}
@@ -31,7 +23,6 @@ const Modal = (props) => {
                     style={{ visibility: !shouldArrowsDisplay.left ? 'hidden' : null }}
                     onClick={props.decrement}>{'<'}</div>
                 <div className={classes.modalBox}>
-                    <button className={classes.close} onClick={closeModal}>x</button>
                     <h3>{props.title}</h3>
                     <p>{props.text}</p>
                     <div className={classes.els} style={{ flexDirection: props.additionalElementsDirection }}>
