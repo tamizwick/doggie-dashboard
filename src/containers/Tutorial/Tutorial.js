@@ -20,16 +20,16 @@ const Tutorial = (props) => {
     }, [modalNumber]);
 
     const incrementStepNumber = () => {
-        setModalNumber(modalNumber + 1);
+        setModalNumber(prevModalNumber => prevModalNumber + 1);
     };
 
     const decrementStepNumber = () => {
-        setModalNumber(modalNumber - 1);
+        setModalNumber(prevModalNumber => prevModalNumber - 1);
     };
 
     const startGame = () => {
         dispatch({ type: 'HIDE_TUTORIAL' });
-        dispatch({ type: 'UNPAUSE' });
+        setTimeout(() => dispatch({ type: 'UNPAUSE' }), 650);
     };
 
     const modals = tutorialData.map((data, index) => {

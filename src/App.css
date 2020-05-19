@@ -1,0 +1,10 @@
+.exit-active {
+    animation: to-top .5s ease-out;
+    position: absolute;
+    left: 50%;
+}
+
+@keyframes to-top {
+    0% {top: 15%}
+    100% {top: -100%}
+}

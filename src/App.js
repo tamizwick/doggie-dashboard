@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import { useSelector } from 'react-redux';
+import { CSSTransition } from 'react-transition-group';
 
 import Header from './components/Header/Header';
 import Tiles from './components/UI/Tiles/Tiles';
@@ -13,7 +14,13 @@ function App() {
     <div className="App">
       <Header />
       <Tiles />
-      {showTutorial && <Tutorial />}
+      <CSSTransition
+        in={showTutorial}
+        timeout={500}
+        mountOnEnter
+        unmountOnExit>
+        <Tutorial />
+      </CSSTransition>
     </div>
   );
 }
