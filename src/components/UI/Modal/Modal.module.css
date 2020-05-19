@@ -81,19 +81,19 @@
     animation: to-top .5s ease-out;
 }
 
-.enterFromRight .modal {
-    animation: from-right .2s ease-in;
+.left .enterActive .modal {
+    animation: from-right .2s ease-out;
 }
 
-.exitToLeft .modal {
+.left .exitActive .modal {
     animation: to-left .2s ease-out;
 }
 
-.enterFromLeft .modal {
-    animation: from-left .2s ease-in;
+.right .enterActive .modal {
+    animation: from-left .2s ease-out;
 }
 
-.exitToRight .modal {
+.right .exitActive .modal {
     animation: to-right .2s ease-out;
 }
 
