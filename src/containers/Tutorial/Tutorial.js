@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import modalClasses from '../../components/UI/Modal/Modal.module.css';
 
 import Modal from '../../components/UI/Modal/Modal';
 import Button from '../../components/UI/Button/Button';
@@ -8,6 +10,7 @@ import { tutorialData } from '../../assets/tutorial-data';
 
 const Tutorial = (props) => {
     const [modalNumber, setModalNumber] = useState(0);
+    const showTutorial = useSelector(state => state.showTutorial);
     const dispatch = useDispatch();
 
     const incrementStepNumber = () => {
@@ -36,22 +39,36 @@ const Tutorial = (props) => {
         });
 
         return (
-            <Modal
+            //@TODO: Get the left button to slide the other direction.
+            //Problem is setting the classes before you know what direction the next click will be.
+            <CSSTransition
+                in={showTutorial}
+                timeout={200}
+                classNames={{
+                    enterActive: modalClasses.enterFromRight,
+                    exitActive: modalClasses.exitToLeft
+                }}
                 key={index}
-                backdrop={true}
-                title={data.title}
-                text={data.text}
-                additionalElements={elements}
-                additionalElementsDirection={modalNumber === 1 ? 'row' : 'column'}
-                steps={tutorialData.length}
-                currentStep={modalNumber}
-                increment={incrementStepNumber}
-                decrement={decrementStepNumber} />);
+                mountOnEnter
+                unmountOnExit>
+                <Modal
+                    backdrop={true}
+                    title={data.title}
+                    text={data.text}
+                    additionalElements={elements}
+                    additionalElementsDirection={modalNumber === 1 ? 'row' : 'column'}
+                    steps={tutorialData.length}
+                    currentStep={modalNumber}
+                    increment={incrementStepNumber}
+                    decrement={decrementStepNumber} />
+            </CSSTransition>
+        );
     });
 
-
     return (
-        modals[modalNumber]
+        <TransitionGroup>
+            {modals[modalNumber]}
+        </TransitionGroup>
     );
 }
 

@@ -1,6 +1,5 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import classes from './Modal.module.css';
-//@TODO: React Transitions
 const Modal = (props) => {
     const shouldArrowsDisplay = {
         left: false,
@@ -15,7 +14,7 @@ const Modal = (props) => {
     }
 
     return (
-        <Fragment>
+        <div>
             {props.backdrop && <div className={classes.backdrop}></div>}
             <div className={classes.modal}>
                 <div
@@ -34,7 +33,7 @@ const Modal = (props) => {
                     style={{ visibility: !shouldArrowsDisplay.right ? 'hidden' : null }}
                     onClick={props.increment}>{'>'}</div>
             </div>
-        </Fragment>
+        </div>
     );
 }
 

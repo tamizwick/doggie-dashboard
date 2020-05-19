@@ -30,18 +30,6 @@
     /* min-height: 400px; */
 }
 
-.modalBox .close {
-    background: inherit;
-    box-shadow: none;
-    border: 0;
-    color: inherit;
-    font-size: 200%;
-    cursor: pointer;
-    padding: 0 .25em;
-    position: relative;
-    left: 360px;
-}
-
 .modal h3, .modal p, .els {
     margin: 24px;
 }
@@ -83,4 +71,60 @@
 .els img {
     margin: 0 1em 1em;
     max-width: 200px;
+}
+
+.enterFromTop .modal {
+    animation: from-top .5s ease-in;
+}
+
+.exitToTop .modal {
+    animation: to-top .5s ease-out;
+}
+
+.enterFromRight .modal {
+    animation: from-right .2s ease-in;
+}
+
+.exitToLeft .modal {
+    animation: to-left .2s ease-out;
+}
+
+.enterFromLeft .modal {
+    animation: from-left .2s ease-in;
+}
+
+.exitToRight .modal {
+    animation: to-right .2s ease-out;
+}
+
+@keyframes from-top {
+    0% {top: -10%}
+    75% {top: 20%}
+    100% {top: 15%}
+}
+
+@keyframes to-top {
+    0% {top: 15%}
+    25% {top: 20%}
+    100% {top: -10%}
+}
+
+@keyframes from-right {
+    from {left: 90%; opacity: 0}
+    to {left: 50%; opacity: 1}
+}
+
+@keyframes to-left {
+    from {left: 50%; opacity: 1}
+    to {left: 20%; opacity: 0}
+}
+
+@keyframes from-left {
+    from {left: 20%; opacity: 0}
+    to {left: 50%; opacity: 1}
+}
+
+@keyframes to-right {
+    from {left: 50%; opacity: 1}
+    to {left: 90%; opacity: 0}
 }
